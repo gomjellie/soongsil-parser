@@ -4,10 +4,10 @@ import re
 
 class susiso_parser(object):
     def __init__(self):
-        usl_base = 'http://www.ssu.ac.kr/web/kor/plaza_d_01'
+        self.url_base = 'http://www.ssu.ac.kr/web/kor/plaza_d_01'
 
     def refresh_notificationt(self):
-        self.r = requests.get(url_base)
+        self.r = requests.get(self.url_base)
         self.soup = bs(r.text, 'html.parser')
 
         self.noti_list = [tr.find_all('td')[1].text for tr in self.soup.tbody.find_all("tr")]
