@@ -27,11 +27,10 @@ class ssu_parser(object):
         self.refresh_notificationt()
         
         for dept, noti, date, link in self.my_tb:
-            self.ret += '[{department}] <a href={link}>{notification}</a> \n숭실대 공지:{date}\n'.format(\
-                    department = dept,
-                    notification = noti,
+            self.ret += '[{department}] <a href={link}>{notification}</a> \n숭실대 공지:{date}\n'.format(
+                    department = dept.replace('\t', ''),
+                    notification = noti.replace('\t', ''),
                     date = date,
                     link = link)
-            self.ret.replace('\t', '')
         return self.ret
 
