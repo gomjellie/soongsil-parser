@@ -4,6 +4,7 @@ import re
 
 class susiso_parser(object):
     def __init__(self):
+        self.susiso_url = 'http://smartsw.ssu.ac.kr'
         self.url_base = 'http://smartsw.ssu.ac.kr/rb/?c=2/38'
 
     def refresh_notificationt(self):
@@ -25,7 +26,7 @@ class susiso_parser(object):
         
         for noti, date, link in self.my_tb:
             self.ret += '<a href={link}>{notification}</a> \n스시소 공지:{date}\n'.format(\
-                    link = link,
+                    link = '{head_url}{tail_url}'.format(head_url=self.susiso_url,tail_url=re.search('[/][r][b].*[0-9]{4}', link).group()) ,
                     notification = noti,
                     date = date)
             self.ret.replace('\t', '')
