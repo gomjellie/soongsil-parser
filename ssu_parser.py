@@ -10,7 +10,7 @@ class ssu_parser(object):
         self.date = 4
         self.visit_count = 5
 
-    def refresh_notificationt(self):
+    def refresh_notification(self):
         self.r = requests.get(self.url_base)
         self.soup = bs(self.r.text, 'html.parser')
 
@@ -24,13 +24,13 @@ class ssu_parser(object):
 
     def get_notification(self):
         self.ret = ''
-        self.refresh_notificationt()
-        
+        self.refresh_notification()
+
         for dept, noti, date, link in self.my_tb:
             self.ret += '[{department}] <a href={link}>{notification}</a> \n숭실대 공지:{date}\n'.format(
-                    department = dept.replace('\t', ''),
-                    notification = noti.replace('\t', ''),
-                    date = date,
-                    link = link)
-        return self.ret
+                department = dept.replace('\t', ''),
+                notification = noti.replace('\t', ''),
+                date = date,
+                link = link)
+            return self.ret
 
