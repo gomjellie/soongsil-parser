@@ -20,15 +20,27 @@ class susiso_parser(object):
 
         self.my_tb = zip(self.notis, self.dates, self.links)
 
-    def get_notification(self):
-        self.ret = ''
+    def get_notification_with_link(self):
+        ret = ''
         self.refresh_notification()
         
         for noti, date, link in self.my_tb:
-            self.ret += '<a href={link}>{notification}</a> \n스시소 공지:{date}\n'.format(
+            ret += '<a href={link}>{notification}</a> \n{date}\n'.format(
                     link=
                     '{head_url}{tail_url}'.format(head_url=self.susiso_url,tail_url=link),
                     notification=noti,
                     date=date)
-            self.ret.replace('\t', '')
-        return self.ret
+            ret.replace('\t', '')
+        return ret
+    
+    def get_notification(self):
+        ret = ''
+        self.refresh_notification()
+        
+        for noti, date, link in self.my_tb:
+            ret += '{notification} {date}\n'.format(
+                    notification=noti,
+                    date=date)
+            ret.replace('\t', '')
+        return ret
+
